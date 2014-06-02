@@ -53,6 +53,7 @@
 				bar.css(opts.origin, newPos);
 			} else 
 				resplit(newPos);
+				$("#wrap div").children().fadeOut();
 		}
 		function endSplitMouse(evt) {
 			bar.removeClass(opts.activeClass);
@@ -62,6 +63,7 @@
 				resplit(newPos);
 			}
 			panes.css("-webkit-user-select", "text");	// let Safari select text again
+			$("#wrap div").children().fadeIn();			
 			$(document)
 				.unbind("mousemove", doSplitMouse)
 				.unbind("mouseup", endSplitMouse);
