@@ -1,5 +1,11 @@
 <!DOCTYPE html>
-<?php $url = "http://splitr.it/?a=".$_GET['a']."&b=".$_GET['b']."&o=".$_GET['o']."&w=".$_GET['w'];?>
+<?php 
+	$a = $_GET['a'];
+	$b = $_GET['b'];
+	$o = $_GET['o'];
+	$w = $_GET['w'];
+	$url = "http://splitr.it/?a=".$a."&b=".$b."&o=".$o."&w=".$w;
+?>
 <html dir="ltr" lang="fr-FR">
 	<head>
         <meta charset="UTF-8" />
@@ -14,12 +20,16 @@
         <link href="css/reset.css" type="text/css" rel="stylesheet" />
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <link href="css/styles.css" type="text/css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/iconic-glyphs.min.css">
+		<!--[if lt IE 9]>
+		  <link rel="stylesheet" href="css/iconic-glyphs-legacy.css">
+		<![endif]-->
 		<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
         <script type="text/javascript" src="js/splitter.js"></script>
         <title>splitR.it</title>
         <script type="text/javascript">
 	        $().ready(function(){
-	        <? if ($_GET['o']=='v'){?>
+	        <? if ($o=='v'){?>
 				$("#wrap").splitter();
 			<?}else{?>
 				$("#wrap").splitter({type: "h"});
@@ -39,7 +49,7 @@
     </head>
     <body>
     
-    	<?if((!isset($_GET['a']))||(!isset($_GET['b']))){?>
+    	<?if((!isset($a))||(!isset($b))){?>
 	
 	    	<div id="form">
 	    	
@@ -69,11 +79,11 @@
     	<?}else{?>
 			<div id="wrap">
 				<div id="a">
-		    		<iframe src="<?php echo $_GET['a']?>" id="a-frame"></iframe>
+		    		<iframe src="<?php echo $a ?>" id="a-frame"></iframe>
 				</div>
 				
 				<div id="b">
-		    		<iframe src="<?php echo $_GET['b']?>" id="b-frame"></iframe>
+		    		<iframe src="<?php echo $b ?>" id="b-frame"></iframe>
 				</div>  
 			</div>
 			<div class="share">
@@ -85,7 +95,7 @@
 						<button onclick="window.open('http://twitter.com/share?text=J%27utilise%20splitR%20pour%20afficher%20deux%20pages%20c%C3%B4te%20%C3%A0%20c%C3%B4te%20%21&amp;url=<?php echo rawurlencode($url)	;?>', 'Partager sur Twitter', 'width=600, height=350'); return false;" class="twitter">Twitter</a>
 					</li>
 					<li class="permalink">
-						<?function get_isgd_url($url)  
+						<?php function get_isgd_url($url)  
 						{  
 							$ch = curl_init();  
 							$timeout = 5;  
@@ -97,12 +107,22 @@
 							return $content;  
 						}
 						$new_url = get_isgd_url(rawurlencode($url));?>
-						<button class="link">Permalien</button>
+						<button >
+							<span class="iconic" data-glyph="iconic-link-intact" title="iconic-link-intact" aria-hidden="true"></span>
+						</button>
 						<input class="form-control" value="<? echo $new_url;?>" />
 					</li>
-					<!--<li>
-						<button class="orientation" onclick="$().ready(function(){$('#wrap').splitter({type: 'v',sizeLeft: 150});});">Orientation</button>
-					</li>-->
+					<li>
+						<?php 
+							if ($o=='v'){ $o_to = 'h';}else{$o_to = 'v';};
+							$url_rotate = "http://splitr.it/?a=".$a."&b=".$b."&o=".$o_to."&w=".$w;
+						?>
+						
+						<a class="orientation" href="<?php echo $url_rotate;?>">
+							<span class="iconic" data-glyph="iconic-action-redo" title="iconic-action-redo" aria-hidden="true"></span>
+						</a>
+
+					</li>
 										
 				</ul>
 			</div>

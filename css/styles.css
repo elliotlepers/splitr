@@ -116,7 +116,8 @@ body {
 	position: relative;
 }
 
-.share ul li button{
+.share ul li button,
+.share ul li a{
 	width: 35px;
 	height: 35px;
 	line-height: 35px;
@@ -128,6 +129,10 @@ body {
 	text-decoration: none;
 	background: transparent;
 	border: 0;
+}
+
+.share ul li button.facebook,
+.share ul li button.twitter{
 	text-indent: -9999px;
 }
 
@@ -139,11 +144,14 @@ body {
 	background: url(../images/tw.png) no-repeat center;
 }
 
+/*
 .share ul li button.link{
 	background: url(../images/link.png) no-repeat center;
 }
+*/
 
-.share ul li button:hover{
+.share ul li button:hover,
+.share ul li a:hover{
 	background-color: #0489E2;
 }
 
